@@ -1,0 +1,39 @@
+clc;
+clear;
+close all;
+
+
+problem.CostFunction = @(x) Fucntion(x);  
+problem.nVar =2;      
+problem.VarMin =-20;  
+problem.VarMax =20;   
+
+
+phi1=2.15;
+phi2=2.15;
+kappa=1;
+phi=phi1+phi2;
+chi=2*kappa/abs(2-phi-sqrt(phi^2-4*phi));
+params.MaxIt = 1000;      
+params.nPop = 50;          
+params.w = chi;             
+params.wdamp = 1;       
+params.c1 = chi*phi1;           
+params.c2 = chi*phi2;         
+params.ShowIterInfo = true; 
+
+
+
+out = PSO(problem, params);
+
+BestSol = out.BestSol;
+BestCosts = out.BestCosts;
+
+
+
+figure;
+% plot(BestCosts, 'LineWidth', 4);
+semilogy(BestCosts, 'LineWidth', 4);
+xlabel('Iteration');
+ylabel('Best Cost');
+grid on;
