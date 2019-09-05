@@ -1,0 +1,3 @@
+x = randn(1000,1);  
+nbins = 50;
+hist(x,nbins)
